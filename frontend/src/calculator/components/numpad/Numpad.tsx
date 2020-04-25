@@ -1,9 +1,8 @@
-import * as React from "react";
-import Grid from "@material-ui/core/Grid";
-import { Button } from "./Button";
-import { CalculatorContext } from "../Calculator";
-import { ActionTypes, OperationType } from "../reducer";
 import Box from "@material-ui/core/Box";
+import * as React from "react";
+import { CalculatorContext } from "../../context";
+import { ActionTypes, OperationType } from "../../reducer";
+import { Button } from "./Button";
 
 const Numpad: React.FC = () => {
   const { dispatch } = React.useContext(CalculatorContext);

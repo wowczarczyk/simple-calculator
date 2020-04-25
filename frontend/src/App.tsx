@@ -1,6 +1,5 @@
 import React from "react";
-import { Calculator } from "./calculator/Calculator";
-import Grid from "@material-ui/core/Grid";
+import { Calculator } from "./calculator/containers/Calculator";
 import Box from "@material-ui/core/Box";
 
 function App() {

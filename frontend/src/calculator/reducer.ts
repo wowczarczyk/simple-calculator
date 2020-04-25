@@ -112,6 +112,7 @@ export const calculatorReducer = (
           secondInput: getNewNumber(state.secondInput),
         };
       }
+      break;
     case ActionTypes.CALCULATE:
       const { firstInput, secondInput, operation } = state;
       if (secondInput !== undefined && operation) {

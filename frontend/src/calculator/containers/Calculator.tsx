@@ -1,15 +1,11 @@
+import { Paper } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { createContext, Dispatch, useReducer } from "react";
-import Display from "./Display";
-import Numpad from "./numpad/Numpad";
-import {
-  CalculatorActions,
-  calculatorReducer,
-  initialState,
-  State,
-} from "./reducer";
-import { Paper } from "@material-ui/core";
+import React, { useReducer } from "react";
+import Display from "../components/Display";
+import Numpad from "../components/numpad/Numpad";
+import { CalculatorContext } from "../context";
+import { calculatorReducer, initialState } from "../reducer";
 
 const useStyles = makeStyles({
   root: {
@@ -18,14 +14,6 @@ const useStyles = makeStyles({
     border: "2px solid black",
     borderRadius: 8,
   },
-});
-
-export const CalculatorContext = createContext<{
-  state: State;
-  dispatch: Dispatch<CalculatorActions>;
-}>({
-  state: initialState,
-  dispatch: () => null,
 });
 
 export const Calculator: React.FC = () => {

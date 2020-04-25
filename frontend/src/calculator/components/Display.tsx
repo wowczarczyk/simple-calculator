@@ -1,9 +1,9 @@
 import TextField from "@material-ui/core/TextField";
 import * as React from "react";
 import { useContext } from "react";
-import { CalculatorContext } from "./Calculator";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
+import { CalculatorContext } from "../context";
 
 const useStyles = makeStyles((theme: Theme) => ({
   textField: {
