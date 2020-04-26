@@ -1,66 +1,56 @@
 import Box from "@material-ui/core/Box";
 import * as React from "react";
-import { CalculatorContext } from "../../context";
-import { ActionTypes, OperationType } from "../../reducer";
+import { MathOperationType } from "../../reducer";
 import { Button } from "./Button";
 
-const Numpad: React.FC = () => {
-  const { dispatch } = React.useContext(CalculatorContext);
+type Props = {
+  onNumber: (value: number) => void;
+  onMathOperation: (operation: MathOperationType) => void;
+  onClear: () => void;
+  onCalculate: () => void;
+};
 
-  const handleNumber = (value: number) => () => {
-    dispatch({ type: ActionTypes.SET_NUMBER, payload: { value } });
-  };
-
-  const handleOperation = (operation: OperationType) => () => {
-    dispatch({
-      type: ActionTypes.SET_OPERATION,
-      payload: { value: operation },
-    });
-  };
-
-  const handleClear = () => {
-    dispatch({ type: ActionTypes.CLEAR, payload: {} });
-  };
-
-  const handleCalculate = () => {
-    dispatch({ type: ActionTypes.CALCULATE, payload: {} });
-  };
-
+const Numpad: React.FC<Props> = ({
+  onMathOperation,
+  onClear,
+  onCalculate,
+  onNumber,
+}) => {
   return (
     <Box display="flex" flexDirection="column">
       <Box display="flex" flexDirection="row">
-        <Button onClick={handleNumber(7)}>{7}</Button>
-        <Button onClick={handleNumber(8)}>{8}</Button>
-        <Button onClick={handleNumber(9)}>{9}</Button>
-        <Button onClick={handleOperation("divide")} type="operation">
+        <Button onClick={() => onNumber(7)}>{7}</Button>
+        <Button onClick={() => onNumber(8)}>{8}</Button>
+        <Button onClick={() => onNumber(9)}>{9}</Button>
+        <Button onClick={() => onMathOperation("divide")} type="operation">
           {"\u00f7"}
         </Button>
       </Box>
       <Box display="flex" flexDirection="row">
-        <Button onClick={handleNumber(4)}>{4}</Button>
-        <Button onClick={handleNumber(5)}>{5}</Button>
-        <Button onClick={handleNumber(6)}>{6}</Button>
-        <Button onClick={handleOperation("multiply")} type="operation">
+        <Button onClick={() => onNumber(4)}>{4}</Button>
+        <Button onClick={() => onNumber(5)}>{5}</Button>
+        <Button onClick={() => onNumber(6)}>{6}</Button>
+        <Button onClick={() => onMathOperation("multiply")} type="operation">
           {"\u00d7"}
         </Button>
       </Box>
       <Box display="flex" flexDirection="row">
-        <Button onClick={handleNumber(1)}>{1}</Button>
-        <Button onClick={handleNumber(2)}>{2}</Button>
-        <Button onClick={handleNumber(3)}>{3}</Button>
-        <Button onClick={handleOperation("substract")} type="operation">
+        <Button onClick={() => onNumber(1)}>{1}</Button>
+        <Button onClick={() => onNumber(2)}>{2}</Button>
+        <Button onClick={() => onNumber(3)}>{3}</Button>
+        <Button onClick={() => onMathOperation("subtract")} type="operation">
           {"\u2013"}
         </Button>
       </Box>
       <Box display="flex" flexDirection="row">
-        <Button onClick={handleClear} type="operation">
+        <Button onClick={onClear} type="operation">
           {"C"}
         </Button>
-        <Button onClick={handleNumber(0)}>{0}</Button>
-        <Button onClick={handleCalculate} type="operation">
+        <Button onClick={() => onNumber(0)}>{0}</Button>
+        <Button onClick={onCalculate} type="operation">
           {"="}
         </Button>
-        <Button onClick={handleOperation("add")} type="operation">
+        <Button onClick={() => onMathOperation("add")} type="operation">
           {"+"}
         </Button>
       </Box>

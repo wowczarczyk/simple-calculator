@@ -10,7 +10,7 @@ export class CalculatorController {
     @Param('a', new ParseIntPipe()) a: number,
     @Param('b', new ParseIntPipe()) b: number,
   ) {
-    return a + b;
+    return { result: a + b };
   }
 
   @Get('subtract/:a/:b')
@@ -18,7 +18,7 @@ export class CalculatorController {
     @Param('a', new ParseIntPipe()) a: number,
     @Param('b', new ParseIntPipe()) b: number,
   ) {
-    return a - b;
+    return { result: a - b };
   }
 
   @Get('multiply/:a/:b')
@@ -26,7 +26,7 @@ export class CalculatorController {
     @Param('a', new ParseIntPipe()) a: number,
     @Param('b', new ParseIntPipe()) b: number,
   ) {
-    return a * b;
+    return { result: a * b };
   }
 
   @Get('divide/:a/:b')
@@ -34,6 +34,6 @@ export class CalculatorController {
     @Param('a', new ParseIntPipe()) a: number,
     @Param('b', new ParseIntPipe()) b: number,
   ) {
-    return a / b;
+    return { result: a / b };
   }
 }

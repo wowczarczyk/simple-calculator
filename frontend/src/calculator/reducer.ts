@@ -1,11 +1,13 @@
-export type OperationType = "add" | "substract" | "multiply" | "divide";
+import { ServerCalculatorEngine } from "./engine/calculator-engine";
+export type MathOperationType = "add" | "subtract" | "multiply" | "divide";
+
 export type Mode = "first" | "second";
 
 export type State = {
   firstInput: number;
   secondInput?: number;
   mode: Mode;
-  operation?: OperationType;
+  operation?: MathOperationType;
 };
 
 export const initialState: State = {
@@ -36,35 +38,24 @@ export enum ActionTypes {
   CLEAR = "CLEAR",
 }
 
-type ActionPayload = {
+export type ActionPayload = {
   [ActionTypes.SET_OPERATION]: {
-    value: OperationType;
+    first?: number;
+    operation: MathOperationType;
   };
   [ActionTypes.SET_NUMBER]: {
+    first: number;
+    second?: number;
+  };
+  [ActionTypes.CALCULATE]: {
     value: number;
   };
   [ActionTypes.CLEAR]: {};
-  [ActionTypes.CALCULATE]: {};
 };
 
 export type CalculatorActions = Actions<ActionPayload>[keyof Actions<
   ActionPayload
 >];
-
-const MAX_DIGITS = 12;
-
-const calculate = (first: number, second: number, operation: OperationType) => {
-  switch (operation) {
-    case "add":
-      return first + second;
-    case "substract":
-      return first - second;
-    case "multiply":
-      return first * second;
-    case "divide":
-      return first / second;
-  }
-};
 
 export const calculatorReducer = (
   state: State,
@@ -72,57 +63,25 @@ export const calculatorReducer = (
 ): State => {
   switch (action.type) {
     case ActionTypes.SET_OPERATION:
-      if (state.mode === "first" && state.firstInput) {
-        return {
-          ...state,
-          operation: action.payload.value,
-          secondInput: undefined,
-          mode: "second",
-        };
-      } else if (state.secondInput !== undefined && state.operation) {
-        return {
-          ...state,
-          firstInput: calculate(
-            state.firstInput,
-            state.secondInput,
-            state.operation
-          ),
-          secondInput: undefined,
-          mode: "second",
-        };
-      } else return state;
-
+      return {
+        ...state,
+        operation: action.payload.operation,
+        firstInput: action.payload.first || state.firstInput,
+        secondInput: undefined,
+        mode: "second",
+      };
     case ActionTypes.SET_NUMBER:
-      const value = action.payload.value.toString();
-      const getNewNumber = (current?: number) =>
-        parseInt(
-          ((current ? current.toString() : "") + value).substring(0, MAX_DIGITS)
-        );
-
-      if (state.mode === "first") {
-        return {
-          ...state,
-          firstInput: getNewNumber(state.firstInput),
-          secondInput: undefined,
-          mode: "first",
-        };
-      } else if (state.mode === "second") {
-        return {
-          ...state,
-          secondInput: getNewNumber(state.secondInput),
-        };
-      }
-      break;
+      return {
+        ...state,
+        firstInput: action.payload.first,
+        secondInput: action.payload.second,
+      };
     case ActionTypes.CALCULATE:
-      const { firstInput, secondInput, operation } = state;
-      if (secondInput !== undefined && operation) {
-        return {
-          ...state,
-          firstInput: calculate(firstInput, secondInput, operation),
-          mode: "first",
-        };
-      }
-      return state;
+      return {
+        ...state,
+        firstInput: action.payload.value,
+        mode: "first",
+      };
     case ActionTypes.CLEAR:
       return {
         ...state,

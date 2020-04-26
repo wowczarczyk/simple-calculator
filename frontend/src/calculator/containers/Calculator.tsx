@@ -5,6 +5,7 @@ import React, { useReducer } from "react";
 import Display from "../components/Display";
 import Numpad from "../components/numpad/Numpad";
 import { CalculatorContext } from "../context";
+import { useCalculator } from "../hooks/useCalculator";
 import { calculatorReducer, initialState } from "../reducer";
 
 const useStyles = makeStyles({
@@ -17,19 +18,28 @@ const useStyles = makeStyles({
 });
 
 export const Calculator: React.FC = () => {
-  const [state, dispatch] = useReducer(calculatorReducer, initialState);
   const classes = useStyles();
 
+  const {
+    handleCalculate,
+    handleClear,
+    handleNumber,
+    handleOperation,
+  } = useCalculator();
+
   return (
-    <CalculatorContext.Provider value={{ state, dispatch }}>
-      <Paper elevation={10} className={classes.root}>
-        <Box display="inline-block">
-          <Box display="flex" flexDirection="column">
-            <Display />
-            <Numpad />
-          </Box>
+    <Paper elevation={10} className={classes.root}>
+      <Box display="inline-block">
+        <Box display="flex" flexDirection="column">
+          <Display />
+          <Numpad
+            onNumber={handleNumber}
+            onCalculate={handleCalculate}
+            onMathOperation={handleOperation}
+            onClear={handleClear}
+          />
         </Box>
-      </Paper>
-    </CalculatorContext.Provider>
+      </Box>
+    </Paper>
   );
 };

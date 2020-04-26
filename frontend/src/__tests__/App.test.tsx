@@ -1,19 +1,20 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import { Calculator } from "../Calculator";
+import { Calculator } from "../calculator/containers/Calculator";
+import App from "../App";
 
 const pressCalculatorButtons = (commands: string[]) =>
   commands.forEach((command) => fireEvent.click(screen.getByText(command)));
 
 test("Calculator is rendered", () => {
-  render(<Calculator />);
+  render(<App />);
 
   expect(screen.queryByText("=")).toBeVisible();
 });
 
 test("Display works", () => {
-  render(<Calculator />);
+  render(<App />);
 
   pressCalculatorButtons(["0", "0", "2"]);
 
@@ -21,7 +22,7 @@ test("Display works", () => {
 });
 
 test("Simple addition", () => {
-  render(<Calculator />);
+  render(<App />);
 
   pressCalculatorButtons(["2", "3", "+", "2", "="]);
 
@@ -29,7 +30,7 @@ test("Simple addition", () => {
 });
 
 test("Simple multiplication", () => {
-  render(<Calculator />);
+  render(<App />);
 
   pressCalculatorButtons(["2", "3", "\u00d7", "2", "="]);
 
@@ -37,7 +38,7 @@ test("Simple multiplication", () => {
 });
 
 test("Simple division", () => {
-  render(<Calculator />);
+  render(<App />);
 
   pressCalculatorButtons(["2", "4", "\u00f7", "2", "="]);
 
@@ -45,7 +46,7 @@ test("Simple division", () => {
 });
 
 test("Division by zero", () => {
-  render(<Calculator />);
+  render(<App />);
 
   pressCalculatorButtons(["2", "\u00f7", "0", "="]);
 
@@ -53,7 +54,7 @@ test("Division by zero", () => {
 });
 
 test("Division by zero", () => {
-  render(<Calculator />);
+  render(<App />);
 
   pressCalculatorButtons(["2", "\u00f7", "0", "="]);
 
@@ -61,7 +62,7 @@ test("Division by zero", () => {
 });
 
 test("Subsequest calculations using 'equals'", () => {
-  render(<Calculator />);
+  render(<App />);
 
   pressCalculatorButtons(["2", "+", "2", "="]);
 
@@ -77,7 +78,7 @@ test("Subsequest calculations using 'equals'", () => {
 });
 
 test("Subsequest calculations using 'add'", () => {
-  render(<Calculator />);
+  render(<App />);
 
   pressCalculatorButtons(["2", "+", "2", "+"]);
 
@@ -95,7 +96,7 @@ test("Subsequest calculations using 'add'", () => {
 });
 
 test("Clearing calculation", () => {
-  render(<Calculator />);
+  render(<App />);
 
   pressCalculatorButtons(["2", "+", "2", "+"]);
 
@@ -107,7 +108,7 @@ test("Clearing calculation", () => {
 });
 
 test("Big numbers", () => {
-  render(<Calculator />);
+  render(<App />);
 
   pressCalculatorButtons([
     ...Array(12).fill("9"),
