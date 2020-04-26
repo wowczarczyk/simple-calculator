@@ -5,7 +5,7 @@ Highlights 🎉:
 - Slick UI build using [Material UI](https://material-ui.com/) 👌
 - Static typing with help of Typescript 🙏
 - Supercharged by React Hooks 🎣
-- Customizable colors 🌈
+- Customizable colors 🌈 (_coming soon_)
 - Tested using [react-testing-library](https://github.com/testing-library/react-testing-library) 🔍
 - Local (client) or external (server) math calculator engine ⚙️
 - Responsive and mobile friendly ☎️
