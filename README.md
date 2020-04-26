@@ -1,6 +1,6 @@
 ## _*Simple*_ web calculator built in React.
 
-Highlights 🎉:
+### Highlights 🎉:
 
 - Slick UI build using [Material UI](https://material-ui.com/) 👌
 - Static typing with help of Typescript 🙏
@@ -13,3 +13,20 @@ Highlights 🎉:
 <br />
 
 ![Calculator](frontend/public/calculator.png?raw=true "Calculator")
+
+### Usage:
+
+- Cloning the repository
+- Making sure Node.js (>10) and Yarn package bundler are installed
+
+#### Front end:
+
+- Go to `frontend` folder and run `yarn && yarn start`
+
+#### Back end:
+
+- Go to `api` folder and run `yarn && yarn start`
+
+### Configuration
+
+To change the calculator engine from client-side to server-side clone the `.env.template` file to `.env` and customize the options inside this file according to specific needs.
