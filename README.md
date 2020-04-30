@@ -16,8 +16,8 @@
 
 ### Usage:
 
-- Cloning the repository
-- Making sure Node.js (>10) and Yarn package bundler are installed
+1. Clone the repository
+2. Make sure Node.js (>10) and Yarn package bundler are installed
 
 #### Front end:
 
