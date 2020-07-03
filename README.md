@@ -1,5 +1,7 @@
 ## _*Simple*_ web calculator built in React.
 
+DEMO: https://react-basic-calculator.now.sh/
+
 ### Highlights 🎉:
 
 - Slick UI build using [Material UI](https://material-ui.com/) 👌
